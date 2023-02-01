@@ -1,0 +1,123 @@
+{% extends 'home/main.html' %}
+
+{% block link %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+{% endblock link %}
+
+{% block title %}
+    {{item}}
+{% endblock title %}
+
+{% block bodyid %}
+    id="light-bg"
+{% endblock bodyid %}
+
+{% block content %}
+    <div class="block-container">
+        <div class="detail-header-bar">
+            <a class="back-link" href="{% url 'home-page' %}">&#8592; Go Back</a>
+            <h1>
+                <strong>Task : </strong>{{item}}
+            </h1>
+        </div>
+
+        <div class="body-block">
+            <a class="edit-link" href="{% url 'item-update' item.id %}">Update Task</a>
+
+            <div class="section">
+                <p><strong>Task Title:</strong></p>
+                <input type="text" value="{{item.title}}" readonly>
+            </div>
+
+            <div class="section">
+                <p><strong>Description:</strong></p>
+                <input type="text" value="{{item.description}}" readonly>
+            </div>
+
+            <div class="section" style="width: 80%;">
+                <p><strong>Task Priority:</strong></p>
+                <div class="inline-container">
+                    <input type="text" value="{{item.get_priority_display}}" readonly>
+                    <p class="icon-class">
+                        {% if item.get_priority_display == 'HIGH' %}
+                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/wdqztrtx.json"
+                                trigger="hover"
+                                colors="primary:#C71F16"
+                                style="width:30px; height:30px">
+                            </lord-icon>
+
+                        {% elif item.get_priority_display == 'MODERATE' %}
+                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/wdqztrtx.json"
+                                trigger="hover"
+                                colors="primary:#E8B730"
+                                style="width:30px; height:30px">
+                            </lord-icon>
+
+                        {% else %}
+                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/wdqztrtx.json"
+                                trigger="hover"
+                                colors="primary:#00FF00"
+                                style="width:30px; height:30px">
+                            </lord-icon>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="section" style="width: 80%; !important">
+                <p><strong>Task Status:</strong></p>
+                <div class="inline-container">
+                    <input type="text" value="{{item.get_status_display}}" readonly>
+                    <p class="icon-class">
+                        {% if item.get_status_display == 'FINISHED' %}
+                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/egiwmiit.json"
+                                trigger="hover"
+                                colors="primary:#16C72E"
+                                style="width:30px; height:30px">
+                            </lord-icon>
+
+                        {% elif item.get_status_display == 'IN PROGRESS' %}
+                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/qznlhdss.json"
+                                trigger="hover"
+                                colors="primary:#E88C30"
+                                style="width:30px; height:30px">
+                            </lord-icon>
+
+                        {% else %}
+                            <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com/nhfyhmlt.json"
+                                trigger="hover"
+                                colors="primary:#E83A30"
+                                style="width:30px; height:30px">
+                            </lord-icon>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <p class="created-container">{{item.created_on}}</p>
+
+        </div>
+    </div>
+{% endblock content %}

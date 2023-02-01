@@ -1,0 +1,131 @@
+{% extends 'home/main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+NKo&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap" rel="stylesheet">
+{% endblock link %}
+
+{% block title %}
+    My Tasks
+{% endblock title %}
+
+{% block bodyid %}
+    id="dark-bg"
+{% endblock bodyid %}
+
+{% block navbar %}
+    <form method="GET" class="d-flex mx-5" role="search">
+        <input class="form-control me-2" type="text" value="{{search_text}}" placeholder="Search" aria-label="Search" name="search-task">
+        <button class="btn btn-outline-success search-button" type="submit">Search</button>
+    </form>
+{% endblock navbar %}
+
+
+{% block content %}
+    <div class="information-div">
+        <img alt="User" id="welcome-user" src="{% static 'home/Images/welcome-user.png' %}">
+
+        <h1 class="greeting-user">Hello, <strong>{{request.user}}</strong></h1>
+        <h5 class="incomplete-status">You have <strong>{{count}} incomplete</strong> task{{count|pluralize:'s'}}.</h5>
+        <a href="#my-items">
+            <img alt="arrow" id="arrow" src="{% static 'home/Images/arrow.png' %}">
+        </a>
+    </div>
+
+    <div class="item-addtask-wrap">
+        <h4 id="my-items">My Tasks</h4>
+        <a class="add-link" href="{% url 'item-create' %}">&#43;</a>
+    </div>
+
+
+    <hr>
+    {% for item in items %}
+        <div class="item-wrapper">
+            <div class="item-details">
+                <div>
+                    {% if item.get_status_display == 'FINISHED' %}
+                        <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                        <lord-icon
+                            class="task-complete-status"
+                            src="https://cdn.lordicon.com/egiwmiit.json"
+                            trigger="hover"
+                            colors="primary:#16C72E"
+                            style="width:30px; height:30px">
+                        </lord-icon>
+                        <a class="item-heading" href="{% url 'item-detail' item.id %}" ><strike>{{item}}</strike></a>
+                        <p>{{item.created_on}}</p>
+
+                    {% else %}
+                        <a class="item-heading" href="{% url 'item-detail' item.id %}" >{{item}}</a>
+                        <p>{{item.created_on}}</p>
+
+                    {% endif %}
+                </div>
+
+                <p class="priority-icon">
+                    {% if item.get_priority_display == 'HIGH' and item.get_status_display != 'FINISHED' %}
+                        <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                        <lord-icon
+                                src="https://cdn.lordicon.com/wdqztrtx.json"
+                                trigger="hover"
+                                colors="primary:#C71F16"
+                                style="width:30px; height:30px">
+                        </lord-icon>
+
+                    {% elif item.get_priority_display == 'MODERATE' and item.get_status_display != 'FINISHED' %}
+                        <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                        <lord-icon
+                                src="https://cdn.lordicon.com/wdqztrtx.json"
+                                trigger="hover"
+                                colors="primary:#E8B730"
+                                style="width:30px; height:30px">
+                        </lord-icon>
+
+                    {% elif item.get_priority_display == 'LOW' and item.get_status_display != 'FINISHED' %}
+                        <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                        <lord-icon
+                                src="https://cdn.lordicon.com/wdqztrtx.json"
+                                trigger="hover"
+                                colors="primary:#00FF00"
+                                style="width:30px; height:30px">
+                        </lord-icon>
+
+                    {% endif %}
+                </p>
+            </div>
+
+            <a class="delete-icon" href="{% url 'item-delete' item.id %}">
+                <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                <lord-icon
+                    src="https://cdn.lordicon.com/jmkrnisz.json"
+                    trigger="hover"
+                    style="width:25px; height:25px">
+                </lord-icon>
+            </a>
+        </div>
+
+    {% empty %}
+        <h3 class="no-item">No items in List</h3>
+
+    {% endfor %}
+{% endblock content %}
+
+

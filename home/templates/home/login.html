@@ -1,0 +1,43 @@
+{% extends 'home/main.html' %}
+
+{% block link %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@200&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500&display=swap" rel="stylesheet">
+{% endblock link %}
+
+{% block title %}
+    Login
+{% endblock title %}
+
+{% block bodyid %}
+    id="light-bg"
+{% endblock bodyid %}
+
+{% block content %}
+    <div class="block-container">
+        <div class="header-bar">
+            <h1>
+                Login:
+            </h1>
+        </div>
+
+        <div class="body-block">
+            <form method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input class="button-item" type="submit" value="Login">
+            </form>
+
+            <p class="additional-text">Don't have an Account? <a href="{% url 'register' %}">Register</a></p>
+        </div>
+    </div>
+{% endblock content %}

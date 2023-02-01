@@ -1,0 +1,82 @@
+{% extends 'home/main.html' %}
+{% load static %}
+
+{% block link %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+{% endblock link %}
+
+{% block title %}
+    To-Do Application
+{% endblock title %}
+
+{% block bodyid %}
+    id="dark-bg"
+{% endblock bodyid %}
+
+{% block content %}
+    <div class="main-container">
+        <div class="text-container">
+
+            <div class="text-wrapper">
+                <p>Feeling overwhelmed. Missing deadlines. A tendency to forget about important things.<br>General stress or anxiety and a lack of direction in life....</p>
+                <p>With a To-Do List, you can complete your goals. At it's core, a to-do list is a list of "Priorities".</p>
+            </div>
+
+            <ul class="list-container">
+                <li>
+                    <div class="pt">
+                        <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                        <lord-icon
+                            class="bullet-img"
+                            src="https://cdn.lordicon.com/gqdnbnwt.json"
+                            colors="primary:#121331,secondary:#2516C7"
+                            trigger="hover">
+                        </lord-icon>
+                        <p class="points">Increase your Productivity</p>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pt">
+                        <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                        <lord-icon
+                            class="bullet-img"
+                            src="https://cdn.lordicon.com/lupuorrc.json"
+                            colors="primary:#121331,secondary:#2516C7"
+                            trigger="hover">
+                        </lord-icon>
+                        <p class="points">Gain a sense of Accomplishment</p>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="pt">
+                        <script src="https://cdn.lordicon.com/ritcuqlt.js"></script>
+                        <lord-icon
+                            class="bullet-img"
+                            src="https://cdn.lordicon.com/kbtmbyzy.json"
+                            colors="primary:#121331,secondary:#2516C7"
+                            trigger="hover">
+                        </lord-icon>
+                        <p class="points">Better Time Management</p>
+                    </div>
+                </li>
+
+            </ul>
+
+            <a href="{% url 'login' %}">
+                <button class="login-button" type="button">LOGIN &#8594;</button>
+            </a>
+        </div>
+
+        <img alt="To-Do" id="todo-img" src="{% static 'home/Images/bck-img.png' %}">
+    </div>
+
+{% endblock content %}
+
